@@ -1,10 +1,16 @@
 function skillMembers() {
-  var members = [
-    {name: 'name1', skill: 'skill1'},
-    {name: 'name2', skill: 'skill2'},
-    {name: 'name3', skill: 'skill1'},
-    {name: 'name4', skill: 'skill3'},
-    {name: 'name5', skill: 'skill2'}
-  ];
-  return members;
+    var members = [
+        {name: 'John', age: 27},
+        {name: 'Jane', age: 22},
+        {name: 'Paul', age: 31},
+        {name: 'Steve', age: 23},
+        {name: 'Maria', age: 29},
+        {name: 'Tom', age: 24}
+    ];
+    return {
+        members: members,
+        getMember: function (index) {
+            return members[index];
+        }
+    };
 }
