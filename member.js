@@ -1,15 +1,10 @@
 function skillMember() {
-    var member = {
-        name: 'John',
-        age: 25,
-        skills: ['HTML', 'CSS', 'JS'],
-        address: {
-            city: 'New York',
-            country: 'USA'
-        },
-        getSkill: function () {
-            return this.skills;
-        }
+    // this is a private function that can't be accessed from outside
+    function getSkill() {
+        return "JavaScript";
+    }
+    // this is a public function
+    this.getSkill = function() {
+        return getSkill();
     };
-    return member;
 }
