@@ -1,9 +1,9 @@
 function skillMember() {
-    var member = {
-        name: 'member',
-        age: 25,
-        job: 'developer',
-        skill: 'coding'
-    };
-    return member;
+  var member = {
+    name: "John",
+    age: 30,
+    skill: "JS"
+  };
+
+  return member;
 }
