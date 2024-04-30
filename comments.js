@@ -1,33 +1,32 @@
 //Create web server
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var fs = require('fs');
-var path = require('path');
-var commentsPath = path.join(__dirname, 'comments.json');
+const express = require('express');
+const app = express();
+const path = require('path');
+const bodyParser = require('body-parser');
+const comments = require('./comments.json');
+const fs = require('fs');
 
-//Middleware
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-//GET /comments
-app.get('/comments', function(req, res) {
-  fs.readFile(commentsPath, 'utf8', function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    res.json(JSON.parse(data));
-  });
+//Get comments
+app.get('/comments', (req, res) => {
+    res.json(comments);
 });
 
-//POST /comments
-app.post('/comments', function(req, res) {
-  fs.readFile(commentsPath, 'utf8', function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    var comments = JSON.parse(data);
-    var newComment = {
-      id: Date.now(),
+//Post comments
+app.post('/comments', (req, res) => {
+    comments.push(req.body);
+    fs.writeFile('comments.json', JSON.stringify(comments), (err) => {
+        if(err) {
+            res.status(500).send('Error');
+        } else {
+            res.status(201).send('OK');
+        }
+    });
+});
+
+app.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});
